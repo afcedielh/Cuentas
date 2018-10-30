@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9fcd6383f81418fb1f8c8fd83b864cb" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="CuentasModel.Persona" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.Rol" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.Usuario" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.EstadoMeta" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.EstadoTransaccion" Width="1.5" PointX="10.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.EstadoUsuario" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.Opcion" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.TipoCategoria" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.TipoDocumento" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.Log" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.Categorias" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.Meta" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuentasModel.transaccion" Width="1.5" PointX="12.75" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="CuentasModel.FK__Persona__TipoDoc__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Usuario__Persona__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Usuario__Rol__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Categoria__Usuar__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Log__Quien__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Meta__Usuario__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__transacci__Usuar__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Usuario__Estado__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Meta__Estado__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__transacci__Estad__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__Categorias__Tipo__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__transacci__Categ__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.FK__transaccio__Meta__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="CuentasModel.RolOpcion" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

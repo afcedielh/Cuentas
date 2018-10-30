@@ -1,0 +1,949 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CuentasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TipoDocumento" Type="int" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="FechaNacimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Pass" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Intentos" Type="int" Nullable="false" />
+          <Property Name="Rol" Type="int" Nullable="false" />
+          <Property Name="Persona" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoMeta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoTransaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Opcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Controlador" Type="varchar" MaxLength="2500" Nullable="false" />
+          <Property Name="Accion" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolOpcion">
+          <Key>
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdOpcion" />
+          </Key>
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="IdOpcion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCategoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Validacion" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nivel" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Que" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Donde" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cuando" Type="datetime" Nullable="false" />
+          <Property Name="Quien" Type="int" Nullable="false" />
+          <Property Name="Resultado" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EsDeSistema" Type="bit" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="int" />
+        </EntityType>
+        <EntityType Name="Meta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
+          <Property Name="Automatico" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="int" Nullable="false" />
+          <Property Name="Categoria" Type="int" Nullable="false" />
+          <Property Name="EsDeSistema" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Meta" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Categoria__Usuar__5812160E">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categorias">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Categorias__Tipo__571DF1D5">
+          <End Role="TipoCategoria" Type="Self.TipoCategoria" Multiplicity="1" />
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCategoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categorias">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__Quien__59063A47">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="Quien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meta__Estado__5DCAEF64">
+          <End Role="EstadoMeta" Type="Self.EstadoMeta" Multiplicity="1" />
+          <End Role="Meta" Type="Self.Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoMeta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meta__Usuario__5EBF139D">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Meta" Type="Self.Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Persona__TipoDoc__5629CD9C">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolOpcion__IdOpc__5535A963">
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="1" />
+          <End Role="RolOpcion" Type="Self.RolOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opcion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolOpcion">
+              <PropertyRef Name="IdOpcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RolOpcion__IdRol__5441852A">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="RolOpcion" Type="Self.RolOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolOpcion">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacci__Categ__5AEE82B9">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacci__Estad__5BE2A6F2">
+          <End Role="EstadoTransaccion" Type="Self.EstadoTransaccion" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoTransaccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacci__Usuar__59FA5E80">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transaccio__Meta__5CD6CB2B">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Meta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Estado__5165187F">
+          <End Role="EstadoUsuario" Type="Self.EstadoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Persona__534D60F1">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Rol__52593CB8">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CuentasModelStoreContainer">
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="Canonica" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Identidades" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Identidades" store:Type="Tables" />
+          <EntitySet Name="EstadoMeta" EntityType="Self.EstadoMeta" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="EstadoTransaccion" EntityType="Self.EstadoTransaccion" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="EstadoUsuario" EntityType="Self.EstadoUsuario" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="Opcion" EntityType="Self.Opcion" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="RolOpcion" EntityType="Self.RolOpcion" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="TipoCategoria" EntityType="Self.TipoCategoria" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="Parametrizacion" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="Qos" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="Transaccional" store:Type="Tables" />
+          <EntitySet Name="Meta" EntityType="Self.Meta" Schema="Transaccional" store:Type="Tables" />
+          <EntitySet Name="transaccion" EntityType="Self.transaccion" Schema="Transaccional" store:Type="Tables" />
+          <AssociationSet Name="FK__Categoria__Usuar__5812160E" Association="Self.FK__Categoria__Usuar__5812160E">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Categorias" EntitySet="Categorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Categorias__Tipo__571DF1D5" Association="Self.FK__Categorias__Tipo__571DF1D5">
+            <End Role="TipoCategoria" EntitySet="TipoCategoria" />
+            <End Role="Categorias" EntitySet="Categorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__Quien__59063A47" Association="Self.FK__Log__Quien__59063A47">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meta__Estado__5DCAEF64" Association="Self.FK__Meta__Estado__5DCAEF64">
+            <End Role="EstadoMeta" EntitySet="EstadoMeta" />
+            <End Role="Meta" EntitySet="Meta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meta__Usuario__5EBF139D" Association="Self.FK__Meta__Usuario__5EBF139D">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Meta" EntitySet="Meta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Persona__TipoDoc__5629CD9C" Association="Self.FK__Persona__TipoDoc__5629CD9C">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolOpcion__IdOpc__5535A963" Association="Self.FK__RolOpcion__IdOpc__5535A963">
+            <End Role="Opcion" EntitySet="Opcion" />
+            <End Role="RolOpcion" EntitySet="RolOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RolOpcion__IdRol__5441852A" Association="Self.FK__RolOpcion__IdRol__5441852A">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="RolOpcion" EntitySet="RolOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacci__Categ__5AEE82B9" Association="Self.FK__transacci__Categ__5AEE82B9">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacci__Estad__5BE2A6F2" Association="Self.FK__transacci__Estad__5BE2A6F2">
+            <End Role="EstadoTransaccion" EntitySet="EstadoTransaccion" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacci__Usuar__59FA5E80" Association="Self.FK__transacci__Usuar__59FA5E80">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transaccio__Meta__5CD6CB2B" Association="Self.FK__transaccio__Meta__5CD6CB2B">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Estado__5165187F" Association="Self.FK__Usuario__Estado__5165187F">
+            <End Role="EstadoUsuario" EntitySet="EstadoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Persona__534D60F1" Association="Self.FK__Usuario__Persona__534D60F1">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Rol__52593CB8" Association="Self.FK__Usuario__Rol__52593CB8">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CuentasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TipoDocumento1" Relationship="Self.FK__Persona__TipoDoc__5629CD9C" FromRole="Persona" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Persona__534D60F1" FromRole="Persona" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Rol__52593CB8" FromRole="Rol" ToRole="Usuario" />
+          <NavigationProperty Name="Opcion" Relationship="Self.RolOpcion" FromRole="Rol" ToRole="Opcion" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Intentos" Type="Int32" Nullable="false" />
+          <Property Name="Rol" Type="Int32" Nullable="false" />
+          <Property Name="Persona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persona1" Relationship="Self.FK__Usuario__Persona__534D60F1" FromRole="Usuario" ToRole="Persona" />
+          <NavigationProperty Name="Rol1" Relationship="Self.FK__Usuario__Rol__52593CB8" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__Categoria__Usuar__5812160E" FromRole="Usuario" ToRole="Categorias" />
+          <NavigationProperty Name="Log" Relationship="Self.FK__Log__Quien__59063A47" FromRole="Usuario" ToRole="Log" />
+          <NavigationProperty Name="Meta" Relationship="Self.FK__Meta__Usuario__5EBF139D" FromRole="Usuario" ToRole="Meta" />
+          <NavigationProperty Name="transaccion" Relationship="Self.FK__transacci__Usuar__59FA5E80" FromRole="Usuario" ToRole="transaccion" />
+          <NavigationProperty Name="EstadoUsuario" Relationship="Self.FK__Usuario__Estado__5165187F" FromRole="Usuario" ToRole="EstadoUsuario" />
+        </EntityType>
+        <EntityType Name="EstadoMeta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Meta" Relationship="Self.FK__Meta__Estado__5DCAEF64" FromRole="EstadoMeta" ToRole="Meta" />
+        </EntityType>
+        <EntityType Name="EstadoTransaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="transaccion" Relationship="Self.FK__transacci__Estad__5BE2A6F2" FromRole="EstadoTransaccion" ToRole="transaccion" />
+        </EntityType>
+        <EntityType Name="EstadoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Estado__5165187F" FromRole="EstadoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Opcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Controlador" Type="String" MaxLength="2500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Accion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Self.RolOpcion" FromRole="Opcion" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="TipoCategoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__Categorias__Tipo__571DF1D5" FromRole="TipoCategoria" ToRole="Categorias" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Validacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__Persona__TipoDoc__5629CD9C" FromRole="TipoDocumento" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nivel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Que" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Donde" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cuando" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quien" Type="Int32" Nullable="false" />
+          <Property Name="Resultado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Log__Quien__59063A47" FromRole="Log" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EsDeSistema" Type="Boolean" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK__Categoria__Usuar__5812160E" FromRole="Categorias" ToRole="Usuario" />
+          <NavigationProperty Name="TipoCategoria" Relationship="Self.FK__Categorias__Tipo__571DF1D5" FromRole="Categorias" ToRole="TipoCategoria" />
+          <NavigationProperty Name="transaccion" Relationship="Self.FK__transacci__Categ__5AEE82B9" FromRole="Categorias" ToRole="transaccion" />
+        </EntityType>
+        <EntityType Name="Meta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Valor" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Automatico" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK__Meta__Usuario__5EBF139D" FromRole="Meta" ToRole="Usuario" />
+          <NavigationProperty Name="EstadoMeta" Relationship="Self.FK__Meta__Estado__5DCAEF64" FromRole="Meta" ToRole="EstadoMeta" />
+          <NavigationProperty Name="transaccion" Relationship="Self.FK__transaccio__Meta__5CD6CB2B" FromRole="Meta" ToRole="transaccion" />
+        </EntityType>
+        <EntityType Name="transaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Int32" Nullable="false" />
+          <Property Name="Categoria" Type="Int32" Nullable="false" />
+          <Property Name="EsDeSistema" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Meta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK__transacci__Usuar__59FA5E80" FromRole="transaccion" ToRole="Usuario" />
+          <NavigationProperty Name="EstadoTransaccion" Relationship="Self.FK__transacci__Estad__5BE2A6F2" FromRole="transaccion" ToRole="EstadoTransaccion" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__transacci__Categ__5AEE82B9" FromRole="transaccion" ToRole="Categorias" />
+          <NavigationProperty Name="Meta1" Relationship="Self.FK__transaccio__Meta__5CD6CB2B" FromRole="transaccion" ToRole="Meta" />
+        </EntityType>
+        <Association Name="FK__Persona__TipoDoc__5629CD9C">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Persona__534D60F1">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Rol__52593CB8">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Categoria__Usuar__5812160E">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categorias">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log__Quien__59063A47">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="Quien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meta__Usuario__5EBF139D">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Meta" Type="Self.Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacci__Usuar__59FA5E80">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Estado__5165187F">
+          <End Role="EstadoUsuario" Type="Self.EstadoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meta__Estado__5DCAEF64">
+          <End Role="EstadoMeta" Type="Self.EstadoMeta" Multiplicity="1" />
+          <End Role="Meta" Type="Self.Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoMeta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacci__Estad__5BE2A6F2">
+          <End Role="EstadoTransaccion" Type="Self.EstadoTransaccion" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoTransaccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Categorias__Tipo__571DF1D5">
+          <End Role="TipoCategoria" Type="Self.TipoCategoria" Multiplicity="1" />
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCategoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categorias">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacci__Categ__5AEE82B9">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transaccio__Meta__5CD6CB2B">
+          <End Role="Meta" Type="Self.Meta" Multiplicity="1" />
+          <End Role="transaccion" Type="Self.transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transaccion">
+              <PropertyRef Name="Meta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RolOpcion">
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="*" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CuentasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="EstadoMeta" EntityType="Self.EstadoMeta" />
+          <EntitySet Name="EstadoTransaccion" EntityType="Self.EstadoTransaccion" />
+          <EntitySet Name="EstadoUsuario" EntityType="Self.EstadoUsuario" />
+          <EntitySet Name="Opcion" EntityType="Self.Opcion" />
+          <EntitySet Name="TipoCategoria" EntityType="Self.TipoCategoria" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" />
+          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Meta" EntityType="Self.Meta" />
+          <EntitySet Name="transaccion" EntityType="Self.transaccion" />
+          <AssociationSet Name="FK__Persona__TipoDoc__5629CD9C" Association="Self.FK__Persona__TipoDoc__5629CD9C">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Persona__534D60F1" Association="Self.FK__Usuario__Persona__534D60F1">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Rol__52593CB8" Association="Self.FK__Usuario__Rol__52593CB8">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Categoria__Usuar__5812160E" Association="Self.FK__Categoria__Usuar__5812160E">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Categorias" EntitySet="Categorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log__Quien__59063A47" Association="Self.FK__Log__Quien__59063A47">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meta__Usuario__5EBF139D" Association="Self.FK__Meta__Usuario__5EBF139D">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Meta" EntitySet="Meta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacci__Usuar__59FA5E80" Association="Self.FK__transacci__Usuar__59FA5E80">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Estado__5165187F" Association="Self.FK__Usuario__Estado__5165187F">
+            <End Role="EstadoUsuario" EntitySet="EstadoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meta__Estado__5DCAEF64" Association="Self.FK__Meta__Estado__5DCAEF64">
+            <End Role="EstadoMeta" EntitySet="EstadoMeta" />
+            <End Role="Meta" EntitySet="Meta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacci__Estad__5BE2A6F2" Association="Self.FK__transacci__Estad__5BE2A6F2">
+            <End Role="EstadoTransaccion" EntitySet="EstadoTransaccion" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Categorias__Tipo__571DF1D5" Association="Self.FK__Categorias__Tipo__571DF1D5">
+            <End Role="TipoCategoria" EntitySet="TipoCategoria" />
+            <End Role="Categorias" EntitySet="Categorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacci__Categ__5AEE82B9" Association="Self.FK__transacci__Categ__5AEE82B9">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transaccio__Meta__5CD6CB2B" Association="Self.FK__transaccio__Meta__5CD6CB2B">
+            <End Role="Meta" EntitySet="Meta" />
+            <End Role="transaccion" EntitySet="transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="RolOpcion" Association="Self.RolOpcion">
+            <End Role="Opcion" EntitySet="Opcion" />
+            <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CuentasModelStoreContainer" CdmEntityContainer="CuentasEntities">
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="CuentasModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="CuentasModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="CuentasModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Intentos" ColumnName="Intentos" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Persona" ColumnName="Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoMeta">
+            <EntityTypeMapping TypeName="CuentasModel.EstadoMeta">
+              <MappingFragment StoreEntitySet="EstadoMeta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoTransaccion">
+            <EntityTypeMapping TypeName="CuentasModel.EstadoTransaccion">
+              <MappingFragment StoreEntitySet="EstadoTransaccion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoUsuario">
+            <EntityTypeMapping TypeName="CuentasModel.EstadoUsuario">
+              <MappingFragment StoreEntitySet="EstadoUsuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Opcion">
+            <EntityTypeMapping TypeName="CuentasModel.Opcion">
+              <MappingFragment StoreEntitySet="Opcion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCategoria">
+            <EntityTypeMapping TypeName="CuentasModel.TipoCategoria">
+              <MappingFragment StoreEntitySet="TipoCategoria">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumento">
+            <EntityTypeMapping TypeName="CuentasModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="TipoDocumento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Validacion" ColumnName="Validacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="CuentasModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Que" ColumnName="Que" />
+                <ScalarProperty Name="Donde" ColumnName="Donde" />
+                <ScalarProperty Name="Cuando" ColumnName="Cuando" />
+                <ScalarProperty Name="Quien" ColumnName="Quien" />
+                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="CuentasModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EsDeSistema" ColumnName="EsDeSistema" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meta">
+            <EntityTypeMapping TypeName="CuentasModel.Meta">
+              <MappingFragment StoreEntitySet="Meta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Automatico" ColumnName="Automatico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transaccion">
+            <EntityTypeMapping TypeName="CuentasModel.transaccion">
+              <MappingFragment StoreEntitySet="transaccion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="EsDeSistema" ColumnName="EsDeSistema" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RolOpcion" TypeName="CuentasModel.RolOpcion" StoreEntitySet="RolOpcion">
+            <EndProperty Name="Opcion">
+              <ScalarProperty Name="Id" ColumnName="IdOpcion" />
+            </EndProperty>
+            <EndProperty Name="Rol">
+              <ScalarProperty Name="Id" ColumnName="IdRol" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
