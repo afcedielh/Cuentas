@@ -158,20 +158,67 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Categorias.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuentas.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Cuentas.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cuentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cuentas.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Cuentas.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EstadoMeta.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoTransaccion.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoUsuario.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Meta.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Opcion.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Persona.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rol.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoCategoria.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDocumento.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transaccion.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>Cuentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\VMUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build\css\custom.css" />
@@ -185,15 +232,20 @@
     <Content Include="build\images\loading.gif" />
     <Content Include="build\js\custom.js" />
     <Content Include="build\js\custom.min.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="build\Login\css\main.css" />
+    <Content Include="build\Login\css\util.css" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="build\Login\fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="build\Login\fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="build\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="build\Login\images\icons\favicon.ico" />
+    <Content Include="build\Login\js\main.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="images\american-express.png" />
     <Content Include="images\cropper.jpg" />
     <Content Include="images\favicon.ico" />
@@ -213,9 +265,13 @@
     <Content Include="Models\Cuentas.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Cuentas.Context.cs</LastGenOutput>
+      <DependentUpon>Cuentas.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Models\Cuentas.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cuentas.edmx</DependentUpon>
+      <LastGenOutput>Cuentas.cs</LastGenOutput>
+    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -223,23 +279,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Cuentas.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\Cuentas.edmx.diagram">
+    <Content Include="Models\Cuentas.edmx.diagram">
       <DependentUpon>Cuentas.edmx</DependentUpon>
-    </None>
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    </Content>
     <Content Include="vendors\animate.css\animate.css" />
     <Content Include="vendors\animate.css\animate.min.css" />
     <Content Include="vendors\animate.css\gulpfile.js" />
+    <Content Include="vendors\animsition\css\animsition.css" />
+    <Content Include="vendors\animsition\css\animsition.min.css" />
+    <Content Include="vendors\animsition\js\animsition.js" />
+    <Content Include="vendors\animsition\js\animsition.min.js" />
     <Content Include="vendors\autosize\.gitignore" />
     <Content Include="vendors\autosize\build.js" />
     <Content Include="vendors\autosize\dist\autosize.js" />
@@ -507,6 +556,7 @@
     <Content Include="vendors\Chart.js\test\scale.logarithmic.tests.js" />
     <Content Include="vendors\Chart.js\test\scale.radialLinear.tests.js" />
     <Content Include="vendors\Chart.js\test\scale.time.tests.js" />
+    <Content Include="vendors\countdowntime\countdowntime.js" />
     <Content Include="vendors\cropper\dist\cropper.css" />
     <Content Include="vendors\cropper\dist\cropper.js" />
     <Content Include="vendors\cropper\dist\cropper.min.css" />
@@ -528,6 +578,8 @@
     <Content Include="vendors\cropper\src\js\template.js" />
     <Content Include="vendors\cropper\src\js\utilities.js" />
     <Content Include="vendors\cropper\src\js\variables.js" />
+    <Content Include="vendors\css-hamburgers\hamburgers.css" />
+    <Content Include="vendors\css-hamburgers\hamburgers.min.css" />
     <Content Include="vendors\datatables.net-bs\css\dataTables.bootstrap.css" />
     <Content Include="vendors\datatables.net-bs\css\dataTables.bootstrap.min.css" />
     <Content Include="vendors\datatables.net-bs\js\dataTables.bootstrap.js" />
@@ -1389,6 +1441,10 @@
     <Content Include="vendors\DateJS\src\i18n\zh-SG.js" />
     <Content Include="vendors\DateJS\src\i18n\zh-TW.js" />
     <Content Include="vendors\DateJS\src\i18n\zu-ZA.js" />
+    <Content Include="vendors\daterangepicker\daterangepicker.css" />
+    <Content Include="vendors\daterangepicker\daterangepicker.js" />
+    <Content Include="vendors\daterangepicker\moment.js" />
+    <Content Include="vendors\daterangepicker\moment.min.js" />
     <Content Include="vendors\devbridge-autocomplete\dist\jquery.autocomplete.js" />
     <Content Include="vendors\devbridge-autocomplete\dist\jquery.autocomplete.min.js" />
     <Content Include="vendors\devbridge-autocomplete\dist\license.txt" />
@@ -3263,6 +3319,8 @@
     <Content Include="vendors\pdfmake\build\pdfmake.js" />
     <Content Include="vendors\pdfmake\build\pdfmake.min.js" />
     <Content Include="vendors\pdfmake\build\vfs_fonts.js" />
+    <Content Include="vendors\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="vendors\perfect-scrollbar\perfect-scrollbar.min.js" />
     <Content Include="vendors\pnotify\.gitignore" />
     <Content Include="vendors\pnotify\dist\pnotify.animate.js" />
     <Content Include="vendors\pnotify\dist\pnotify.brighttheme.css" />
@@ -4499,13 +4557,64 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="build\Login\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="build\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="build\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="build\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="build\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="build\Login\fonts\poppins\Poppins-ThinItalic.ttf" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Registrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="vendors\devbridge-autocomplete\src\jquery.autocomplete.d.ts" />
