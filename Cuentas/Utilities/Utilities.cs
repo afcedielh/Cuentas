@@ -19,7 +19,7 @@ namespace Cuentas.Utilities
         {
             try
             {
-                string key = ConfigurationManager.AppSettings["ClientId"];
+                string key = ConfigurationManager.AppSettings["KEY"];
                 byte[] keyArray;
                 byte[] Arreglo_a_Cifrar = Encoding.UTF8.GetBytes(texto);
                 //Se utilizan las clases de encriptación MD5
@@ -39,7 +39,7 @@ namespace Cuentas.Utilities
             }
             catch (Exception ex)
             {
-
+                throw;
             }
             return texto;
         }
@@ -53,7 +53,7 @@ namespace Cuentas.Utilities
         {
             try
             {
-                string key = ConfigurationManager.AppSettings["ClientId"];
+                string key = ConfigurationManager.AppSettings["KEY"];
                 byte[] keyArray;
                 byte[] Array_a_Descifrar = Convert.FromBase64String(textoEncriptado);
                 //algoritmo MD5
@@ -71,7 +71,7 @@ namespace Cuentas.Utilities
             }
             catch (Exception)
             {
-
+                throw;
             }
             return textoEncriptado;
         }

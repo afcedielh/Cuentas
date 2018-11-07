@@ -19,5 +19,8 @@ namespace Cuentas.Models.ViewModels
 
         [Required(ErrorMessage = "El Documento del usuario es requerido.")]
         public int Documento { get; set; }
+
+        [Required(ErrorMessage = "El Documento del usuario es requerido.")]
+        public int TipoDocumento { get; set; }
     }
 }

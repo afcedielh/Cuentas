@@ -1,7 +1,7 @@
---USE master
---GO
---DROP DATABASE Cuentas
---GO
+USE master
+GO
+DROP DATABASE Cuentas
+GO
 CREATE DATABASE Cuentas
 GO
 USE Cuentas
@@ -18,7 +18,7 @@ CREATE SCHEMA Qos;
 GO
 
 CREATE TABLE Identidades.Usuario (
-    Id INTEGER NOT NULL,
+    Id INTEGER NOT NULL IDENTITY(1,1),
     UserName VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     Pass VARCHAR(MAX) NOT NULL,
@@ -56,7 +56,8 @@ CREATE TABLE Parametrizacion.RolOpcion (
 );
 
 CREATE TABLE Canonica.Persona (
-    Id INTEGER NOT NULL,
+    Id INTEGER NOT NULL IDENTITY(1,1),
+    NumeroDocumento INTEGER NOT NULL,
     TipoDocumento INTEGER NOT NULL,
     Nombres VARCHAR(255) NOT NULL,
     Apellidos VARCHAR(255) NOT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE Parametrizacion.TipoDocumento (
 );
 
 CREATE TABLE Transaccional.Categorias (
-    Id INTEGER NOT NULL,
+    Id INTEGER NOT NULL IDENTITY(1,1),
     Nombre VARCHAR(255) NOT NULL,
     EsDeSistema BIT NOT NULL,
     Tipo INTEGER NOT NULL,
@@ -88,7 +89,7 @@ CREATE TABLE Parametrizacion.TipoCategoria (
 );
 
 CREATE TABLE Qos.Log (
-    Id INTEGER NOT NULL,
+    Id INTEGER NOT NULL IDENTITY(1,1),
     Nivel VARCHAR(255) NOT NULL,
     Que VARCHAR(255) NOT NULL,
     Donde VARCHAR(255) NOT NULL,
@@ -99,7 +100,7 @@ CREATE TABLE Qos.Log (
 );
 
 CREATE TABLE Transaccional.transaccion (
-    Id INTEGER NOT NULL,
+    Id INTEGER NOT NULL IDENTITY(1,1),
     Usuario INTEGER NOT NULL,
     Monto INTEGER NOT NULL,
     Categoria INTEGER NOT NULL,
@@ -110,7 +111,7 @@ CREATE TABLE Transaccional.transaccion (
 );
 
 CREATE TABLE Transaccional.Meta (
-    Id INTEGER NOT NULL,
+    Id INTEGER NOT NULL IDENTITY(1,1),
     Nombre VARCHAR(255) NOT NULL,
     Descripcion VARCHAR(MAX) NOT NULL,
     Valor INTEGER NOT NULL,
