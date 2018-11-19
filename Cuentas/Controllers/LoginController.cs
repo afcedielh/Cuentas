@@ -36,6 +36,15 @@ namespace Cuentas.Controllers
         [HttpPost]
         public ActionResult Validar(Usuario usr)
         {
+            //Consultamos los usuarios del sistema
+            var Usuario = BD.Usuario;
+            var pass = Utilities.Utilities.Encriptar(usr.Pass);            
+            var validado = Usuario.Where(a => a.Email.Equals(usr.UserName) 
+                && a.Pass.Equals(pass)).FirstOrDefault();
+            if (validado != null)
+            {
+
+            }
             return Redirect("/");
         }
 
@@ -53,6 +62,7 @@ namespace Cuentas.Controllers
             else
             {
                 if (Personas.Where(a => a.TipoDocumento == usr.TipoDocumento && a.NumeroDocumento == usr.Documento).Count() == 0)
+                {
                     Personas.Add(new Persona()
                     {
                         NumeroDocumento = usr.Documento,
@@ -61,15 +71,18 @@ namespace Cuentas.Controllers
                         Apellidos = "",
                         Telefono = ""
                     });
-
-                BD.SaveChanges();
+                    BD.SaveChanges();
+                }
 
                 Usuario.Add(new Models.Usuario()
                 {
                     Email = usr.Email,
                     UserName = usr.UserName,
                     Pass = Utilities.Utilities.Encriptar(usr.Pass),
-                    Persona =  Personas.Where(a => a.TipoDocumento == usr.TipoDocumento && a.Documento == usr.Documento).Select(a => a.Id).FirstOrDefault()
+                    Persona = Personas.Where(a => a.TipoDocumento == usr.TipoDocumento && a.NumeroDocumento == usr.Documento).Select(a => a.Id).FirstOrDefault(),
+                    Intentos = 0,
+                    Rol = 1,
+                    Estado = 1
                 });
                 BD.SaveChanges();
             }

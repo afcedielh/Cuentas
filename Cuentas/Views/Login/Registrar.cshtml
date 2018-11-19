@@ -41,18 +41,22 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        @Html.TextBoxFor(model => model.Documento, new { @class = "input100"})
+                        @Html.TextBoxFor(model => model.Documento, new { @class = "input100" })
                         <span class="focus-input100" data-placeholder="Numero Documento "></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        @Html.TextBoxFor(model => model.Email, new { @class = "input100"})
+                    <div class="wrap-input100 validate-input">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "input100" })
                         <span class="focus-input100" data-placeholder="Email "></span>
                     </div>
 
+                    <div class="wrap-input100 validate-input">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "input100" })
+                        <span class="focus-input100" data-placeholder="UserName "></span>
+                    </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        @Html.PasswordFor(model => model.Pass, new { @class = "input100"})
+                    <div class="wrap-input100 validate-input">
+                        @Html.PasswordFor(model => model.Pass, new { @class = "input100" })
                         <span class="focus-input100" data-placeholder="clave "></span>
                         @Html.ValidationMessageFor(model => model.Pass)
                     </div>
